@@ -21,26 +21,70 @@ public class Main14620 {
 			for(int j = 0; j < N; j++)
 				map[i][j] = Integer.parseInt(st.nextToken());
 		}
+		
+		solve(0, 0, 1);
+		System.out.println(sol);
 	}
 	
-	static int[] dx = {0, -1, 1, 0, 0};
-	static int[] dy = {0, 0, 0, -1, 1};
-	static int N;
-	static int[][] map;
-	static boolean[][] visited;
-	static int sol = Integer.MAX_VALUE;
+	private static int[] dx = {0, -1, 1, 0, 0};
+	private static int[] dy = {0, 0, 0, -1, 1};
+	private static int N;
+	private static int[][] map;
+	private static boolean[][] visited;
+	private static int sol = Integer.MAX_VALUE;
 	
-	static void solve(List<Pos> list, int cost, int cnt) {
+	private static void solve(int cost, int cnt, int x) {
+		if(cnt == 3) {
+			sol = Math.min(sol, cost);
+			return;
+		}
 		
+		for(int r = x; r < N - 1; r++) {
+			for(int c = 1; c < N - 1; c++) {
+				if( !isOk(r, c) )
+					continue;
+				
+				int nCost = Plant(r, c);
+				
+				solve(cost + nCost, cnt + 1, r);
+				
+				Pluck(r, c);
+			}
+		}
 	}
 	
-	static class Pos {
-		int x;
-		int y;
-		
-		public Pos(int x, int y) {
-			this.x = x;
-			this.y = y;
+	private static boolean isOk(int x, int y) {
+		boolean flag = true;
+		for(int d = 0; d < 5; d++) {
+			int nx = x + dx[d];
+			int ny = y + dy[d];
+			
+			if(visited[nx][ny]) {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+	
+	private static int Plant(int x, int y) {
+		int cost = 0;
+		for(int d = 0; d < 5; d++) {
+			int nx = x + dx[d];
+			int ny = y + dy[d];
+			
+			cost += map[nx][ny];
+			visited[nx][ny] = true;
+		}
+		return cost;
+	}
+	
+	private static void Pluck(int x, int y) {
+		for(int d = 0; d < 5; d++) {
+			int nx = x + dx[d];
+			int ny = y + dy[d];
+			
+			visited[nx][ny] = false;
 		}
 	}
 }
