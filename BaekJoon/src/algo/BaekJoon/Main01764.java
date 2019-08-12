@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -26,6 +27,16 @@ public class Main01764 {
 		tmp = list1.toArray(tmp);
 		
 		List<String> list2 = new ArrayList<>();
+		for(int i = 0; i < M; i++) {
+			String s = br.readLine();
+			int idx = Arrays.binarySearch(tmp, s);
+			if(idx >= 0)
+				list2.add(s);
+		}
 		
+		Collections.sort(list2);
+		System.out.println(list2.size());
+		for(String s : list2)
+			System.out.println(s);
 	}
 }
