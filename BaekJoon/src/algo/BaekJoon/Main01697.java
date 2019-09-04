@@ -10,39 +10,73 @@ import java.util.StringTokenizer;
 public class Main01697 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringTokenizer st;
 		
-		int N = Integer.parseInt(st.nextToken());
-		int K = Integer.parseInt(st.nextToken());
-		int sol = 0;
+		st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
+		visited = new boolean[100001];
+		sol = 0;
 		
-		boolean[] visited = new boolean[100001];
-		
-		Queue<int[]> q = new LinkedList<>();
-		
-		q.add(new int[] {N, 0});
-		
-		while(!q.isEmpty()) {
-			int[] tmp = q.poll();
-			
-			if(tmp[0] == K) {
-				sol = tmp[1];
-				break;
-			}
-			
-			if(!inRange(tmp[0]) || visited[ tmp[0] ])
-				continue;
-			
-			visited[ tmp[0] ] = true;
-			q.add(new int[] {tmp[0] + 1, tmp[1] + 1});
-			q.add(new int[] {tmp[0] - 1, tmp[1] + 1});
-			q.add(new int[] {tmp[0] * 2, tmp[1] + 1});
-		}
-		
+		BFS();
 		System.out.println(sol);
 	}
 	
-	static boolean inRange(int np) {
-		return np >= 0 && np <= 100000;
+	private static int N;
+	private static int K;
+	private static boolean[] visited;
+	private static int sol;
+	
+	private static boolean inRange(int n) {
+		return n >= 0 && n <= 100000;
+	}
+	
+	private static void BFS() {
+		Queue<Position> q = new LinkedList<>();
+		q.add(new Position(N, 0));
+		
+		boolean flag = true;
+		while(!q.isEmpty() && flag) {
+			Position pos = q.poll();
+			
+			for(int i = 0; i < 3 && flag; i++) {
+				int np = pos.p;
+				
+				if(np == K) {
+					sol = pos.sec;
+					flag = false;
+					break;
+				}
+				
+				switch(i) {
+				case 0 :
+					np += 1;	
+					break;
+				case 1 :
+					np -= 1;	
+					break;
+				case 2 :
+					np *= 2;	
+					break;
+				}
+				
+				if(!inRange(np))
+					continue;
+				
+				if(!visited[np]) {
+					visited[np] = true;
+					q.add(new Position(np, pos.sec + 1));
+				}
+			}
+		}
+	}
+	
+	private static class Position {
+		int p;
+		int sec;
+		public Position(int p, int sec) {
+			this.p = p;
+			this.sec = sec;
+		}
 	}
 }
