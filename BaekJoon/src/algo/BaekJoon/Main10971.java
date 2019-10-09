@@ -46,6 +46,9 @@ public class Main10971 {
 				index++;
 			}
 			
+			if( W[ arr[index] ][ arr[0] ] == 0 )
+				return;
+			
 			sum += W[ arr[index] ][ arr[0] ];
 			sol = Math.min(sol, sum);
 			
