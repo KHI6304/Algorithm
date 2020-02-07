@@ -8,6 +8,11 @@ import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class Main07568 {
+	/*
+	 * People 클래스 배열을 통해서 rank 값을 정해주는 것이 포인트이다.
+	 * 각 사람에 대해 자신을 재외한 모든 사람과의 비교를 통해 rank 값을 정해준다.
+	 */
+	
 	static class People{
 		int w;
 		int h;
