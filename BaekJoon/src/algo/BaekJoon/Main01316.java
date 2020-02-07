@@ -10,20 +10,43 @@ public class Main01316 {
 		
 		int N = Integer.parseInt(br.readLine());
 		int sol = 0;
+		
 		for(int i = 0; i < N; i++) {
-			int[] alpa = new int[26];
+			boolean[] alp = new boolean[26];
 			String inp = br.readLine();
 			
-			for(int j = 0; j < inp.length(); j++) {
-				char c = inp.charAt(j);
-				alpa[c - 'a']++;
+			if(inp.length() < 3) {
+				sol++;
+				continue;
 			}
 			
-			for(int j = 0; j < alpa.length; j++)
-				if(alpa[j] > 1)
-					continue;
+			boolean flag = true;
+			for(int j = 0; j < inp.length(); j++) {
+				int idx = 1;
+				
+				if(alp[inp.charAt(j) - 'a']) {
+					flag = false;
+					break;
+				}
+				
+				if(j == inp.length() - 1)
+					break;
+				
+				while(inp.charAt(j) == inp.charAt(j + idx)) {
+					idx++;
+					
+					if(j + idx == inp.length())
+						break;
+				}
+				
+				alp[inp.charAt(j) - 'a'] = true;
+				j += idx - 1;
+			}
 			
-			sol++;
+			if(flag)
+				sol++;
 		}
+		
+		System.out.println(sol);
 	}
 }
