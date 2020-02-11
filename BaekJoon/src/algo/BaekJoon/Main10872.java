@@ -14,7 +14,7 @@ public class Main10872 {
 	
 	private static int fact(int num) {
 		if(num <= 1)
-			return num;
+			return 1;
 		
 		return num * fact(num - 1);
 	}
