@@ -16,20 +16,14 @@ public class Main09372 {
 			int N = Integer.parseInt(st.nextToken());
 			int M = Integer.parseInt(st.nextToken());
 			
-			int[][] map = new int[N + 1][N + 1];
+			
 			for(int i = 0; i < M; i++) {
 				st = new StringTokenizer(br.readLine());
 				int a = Integer.parseInt(st.nextToken());
 				int b = Integer.parseInt(st.nextToken());
-				
-				map[a][b] = map[b][a] = 1;
 			}
 			
-			
+			System.out.println(N - 1);
 		}
-	}
-	
-	private static void BFS() {
-		
 	}
 }
