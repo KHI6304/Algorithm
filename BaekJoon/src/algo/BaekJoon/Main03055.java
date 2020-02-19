@@ -21,15 +21,21 @@ public class Main03055 {
 		StringTokenizer st;
 		
 		st = new StringTokenizer(br.readLine());
-		int R = Integer.parseInt(st.nextToken());
-		int C = Integer.parseInt(st.nextToken());
+		R = Integer.parseInt(st.nextToken());
+		C = Integer.parseInt(st.nextToken());
 		
-		char[][] map = new char[R][C];
+		map = new char[R][C];
 		for(int r = 0; r < R; r++) {
 			map[r] = br.readLine().toCharArray();
-
+			for(int c = 0; c < C; c++) {
+				
+			}
 		}
 	}
 	
-
+	private static int R;
+	private static int C;
+	private static char[][] map;
+	
+	
 }
