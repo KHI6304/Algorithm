@@ -17,33 +17,31 @@ public class Main02923 {
 		
 		for(int i = 1; i <= N; i++) {
 			st = new StringTokenizer(br.readLine());
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
+			A[ Integer.parseInt(st.nextToken()) ]++;
+			B[ Integer.parseInt(st.nextToken()) ]++;
 			
-			A[a]++;
-			B[b]++;
-			
-			int sol = 0;
-			int round = 0;
-			int cntA = 0, cntB = 0;
+			int cnt = 0;
 			int idxA = 100, idxB = 1;
-			while(round != i) {
+			int cntA = 0, cntB = 0;
+			int sol = 0;
+			
+			while(cnt != i) {
 				while(A[idxA] == cntA) {
-					idxA--;
 					cntA = 0;
+					idxA--;
 				}
+				
 				while(B[idxB] == cntB) {
-					idxB++;
 					cntB = 0;
+					idxB++;
 				}
 				
 				sol = Math.max(sol, idxA + idxB);
 				
-				int cntSub = Math.min(A[idxA] - cntA, B[idxB] - cntB);
-				
-				round += cntSub;
-				cntA += cntSub;
-				cntB += cntSub;
+				int min = Math.min(A[idxA] - cntA, B[idxB] - cntB);
+				cnt += min;
+				cntA += min;
+				cntB += min;
 			}
 			
 			System.out.println(sol);
