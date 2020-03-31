@@ -45,15 +45,9 @@ public class Main01780 {
 		for(int x = sx; x < sx + n; x++) {
 			for(int y = sy; y < sy + n; y++) {
 				if(map[x][y] != data) {
-					solve(sx, sy, div);
-					solve(sx, sy + div, div);
-					solve(sx, sy + 2 * div, div);
-					solve(sx + div, sy, div);
-					solve(sx + div, sy + div, div);
-					solve(sx + div, sy + 2 * div, div);
-					solve(sx + 2 * div, sy, div);
-					solve(sx + 2 * div, sy + div, div);
-					solve(sx + 2 * div, sy + 2 * div, div);
+					for(int i = 0; i < 3; i++)
+						for(int j = 0; j < 3; j++)
+							solve(sx + i * div, sy + j * div, div);
 					return;
 				}
 			}
